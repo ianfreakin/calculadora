@@ -1,0 +1,131 @@
+function getcontentClick(event){
+    const value = event.target.event.innerHTML;
+    filterAction(value)
+}
+const filterAction = value =>{
+    value === "0" ? AddnumberInput(0):null;
+    value === "1" ? AddnumberInput(1):null;
+    value === "2" ? AddnumberInput(2):null;
+    value === "3" ? AddnumberInput(3):null;
+    value === "4" ? AddnumberInput(4):null;
+    value === "5" ? AddnumberInput(5):null;
+    value === "6" ? AddnumberInput(6):null;
+    value === "7" ? AddnumberInput(07):null;
+    value === "8" ? AddnumberInput(8):null;
+    value === "9" ? AddnumberInput(9):null;
+    value === "," ? AddnumberInput(","):null;
+
+    value === "+" ? setOperation("+"):null;
+    value === "-" ? setOperation("-"):null;
+    value === "x" ? setOperation("x"):null;
+    value === "/" ? setOperation("/"):null;
+    value === "%" ? setOperation("%"):null;
+    value === "+/-" ? setOperation("+/-"):null;
+
+    value==="=" ? calculation(): null;
+    value==="C" ? resetcalculator(): null;
+}
+function AddnumberInput(value){
+    console.log("estamos en addnumberinput");
+    console.log(value)
+   const inputScreen=document.getElementsByClassName("calculator_screen")(0);
+   const inputvalue = inputscreen.value
+   
+   if(inputvalue==="0" && inputvalue.length === 1 && value !==","){
+
+   inputScreen.value = value
+   inputScreen.value= inputvalue + value;
+   return;
+}
+if(inputscreen.value ==="" && value ==","){
+    inputScreen.value = 0 + value;
+    return;
+}
+
+
+inputscreen.value = inputvalue = value;
+}
+function setOperation(operator){
+    console.log(this.operator);
+    this.operator = operator;
+    console.log(this.operator);
+    const inputScreenvalue = document.getElementsByClassName("calculator_screen")(0);
+    if (inputScreenvalue != 0) {
+        calculation();
+    }
+    
+}
+function calculation(){
+    const inputScreen = document.getElementsByClassName("calculator_screen")(0);
+    let valueOne = transformComatopoint(this.inputvaluememo);
+    let valueTwo = transformComatopoint (inputScreen.value);
+let total = 0;
+console.log('valueOne:',typeof valueOne )
+console.log('valuetwo:',typeof valueTwo)
+console.log("dentro del calculation")
+if(this.operator === "+" && inputScreen.value !==""){
+    
+    total = valueOne + valueTwo;
+    return;
+}
+if(this.operator === "-" && inputScreen.value !== ""){
+    if (valueOne !== 0){
+        total = valueOne * valueTwo;
+}else {
+    total = valueTwo;
+}
+
+}
+
+if(this.operator === "*" && inputScreen.value !== ""){
+    if (valueOne !== 0){
+        total = valueOne * valueTwo;
+}else {
+    total = valueTwo;
+}
+
+}
+if(this.operator === "/" && inputScreen.value !== ""){
+    if (valueOne !== 0){
+        total = valueOne / valueTwo;
+}else {
+    total = valueTwo;
+}
+
+}
+
+if (this.operator=== "%" && inputScreen.value !==""){
+    total = valueTwo / 100;
+}
+
+if (this.operator=== "+/-" && inputScreen.value !==""){
+    total = valueTwo > 100;
+    total = -valueTwo
+    
+
+    }
+
+total= transforpointtoComa(total);
+this.inputvaluememo =  total;
+inputScreen.value = "";
+inputscreen.placeholder = total;
+
+}
+const resetcalculator =() =>{
+    const inputScreen = document.getElementsByClassName("calculator_screen"[0]);
+    inputscreen.value= 0
+    this.setOperation = null;
+
+}
+function transforComatopoint(value){
+    if(typeof value !=="number"){
+        let resulttransform = value.replace(',',',' );
+        return parseFloat(resulttransform)
+    }
+    return value;
+}
+function transforpointtoComa(value){
+    let resulttransform = value.toString();
+    resulttransform = resulttransform.replace('.',',');
+    return resulttransform;
+}
