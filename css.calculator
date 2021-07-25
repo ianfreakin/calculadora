@@ -1,6 +1,5 @@
 html{
-background: linear-gradient (to bottom,#455484D 0%, 000000 100%);
-background-repeat: no repeat;
+background-repeat:no-repeat;
 height:100%;
 }
 
